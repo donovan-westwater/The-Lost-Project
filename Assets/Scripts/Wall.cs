@@ -21,11 +21,14 @@ public class Wall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            applyChange();
+        }
     }
     void applyChange()
     {
-        string filepath = Path.Combine(Directory.GetCurrentDirectory(),"\\"+filename+".json");
+        string filepath = "./" + filename + ".json";//Path.Combine(Directory.GetCurrentDirectory(),"../"+filename+".json");
         string jsontext = System.IO.File.ReadAllText(filepath);
         Filewall obj = readJSON(jsontext);
         this.transform.position = obj.pos;
