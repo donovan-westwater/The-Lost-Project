@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Security.AccessControl;
+using System;
 
 public class FolderSingleton : MonoBehaviour
 {
@@ -22,10 +23,16 @@ public class FolderSingleton : MonoBehaviour
             Destroy(this);
         }
 
-        if (!File.Exists(playerSelectedFilePath))
+        try
         {
-            playerSelectedFilePath = Application.dataPath+"/Result";
-            sourceFilePath = Application.dataPath + "/Source";
+            File.Create(playerSelectedFilePath + "/" + "testForFolder" + ".txt").Dispose();
+            File.Delete(playerSelectedFilePath + "/" + "testForFolder" + ".txt");
         }
+        catch (Exception)
+        {
+            playerSelectedFilePath = Application.dataPath + "/Result";
+        }
+
+        sourceFilePath = Application.dataPath + "/Source";
     }
 }

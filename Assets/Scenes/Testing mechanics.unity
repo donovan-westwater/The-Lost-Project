@@ -838,6 +838,7 @@ MonoBehaviour:
   playerSelectedFilePath: 
   jsonFileName: 
   text: {fileID: 496486609}
+  test: /
 --- !u!65 &1320459057
 BoxCollider:
   m_ObjectHideFlags: 0
