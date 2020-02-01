@@ -5,4 +5,6 @@ using UnityEngine;
 public abstract class GlitchObject : MonoBehaviour
 {
     public virtual void RefreshData(string data) {}
+
+    public virtual void ApplyChange() { }
 }
