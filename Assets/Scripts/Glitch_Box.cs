@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.IO;
 using System.Security.AccessControl;
+using TMPro;
 
 [System.Serializable]
 public class BoxJson
 {
     public bool isActive;
+    public string comment;
 }
+
 
 public class Glitch_Box : GlitchObject
 {
     bool isCollidable;
+
+    public TextMeshProUGUI text;
 
     private void Start()
     {
@@ -33,6 +39,10 @@ public class Glitch_Box : GlitchObject
         {
             ApplyChange();
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Start();
+        }
     }
     //Applies changes from the file to the wall in game
     public override void ApplyChange()
@@ -41,8 +51,8 @@ public class Glitch_Box : GlitchObject
         string jsontext = System.IO.File.ReadAllText(filepath);
 
         BoxJson obj = readJSON(jsontext);
-        this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        this.gameObject.SetActive(obj.isActive);
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(obj.isActive);
+        text.text = obj.comment;
     }
     public override void RefreshData(string data)
     {
@@ -51,6 +61,21 @@ public class Glitch_Box : GlitchObject
     //Turns the raw string info from the text file into the wall's seralized object
     public BoxJson readJSON(string jsontext)
     {
-        return JsonUtility.FromJson<BoxJson>(jsontext);
+        try
+        {
+            return JsonUtility.FromJson<BoxJson>(jsontext);
+        }
+        catch (Exception)
+        {
+            Debug.Log("INVALID JSON RESETING");
+
+            if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
+            {
+                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
+            }
+            File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
+            File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
+            return JsonUtility.FromJson<BoxJson>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
+        }
     }
 }
