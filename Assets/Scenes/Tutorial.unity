@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342685174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.92, y: 5.062, z: 0.22}
+  m_LocalPosition: {x: -34.92, y: 4.131, z: 0.22}
   m_LocalScale: {x: 0.21399947, y: 0.3740063, z: 0.001}
   m_Children: []
   m_Father: {fileID: 0}
@@ -460,6 +460,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591316097}
   m_CullTransparentMesh: 0
+--- !u!1 &752086549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1065936812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!143 &752086554 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0,
@@ -813,7 +819,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpeed: 90
-  number: 0
+  number: 1
+  player: {fileID: 752086549}
+  particles: {fileID: 2107506651}
 --- !u!65 &1031788887
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5918,6 +5926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkPoints:
   - {fileID: 2030593290}
+  - {fileID: 1031788886}
 --- !u!4 &1771138749
 Transform:
   m_ObjectHideFlags: 0
@@ -6223,6 +6232,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinSpeed: 90
   number: 0
+  player: {fileID: 752086549}
+  particles: {fileID: 1347678938}
 --- !u!65 &2030593291
 BoxCollider:
   m_ObjectHideFlags: 0

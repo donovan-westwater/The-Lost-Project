@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         // If the player falls to his death, respawn them at the nearest checkpoint
-        print(transform.position.y);
         if (transform.position.y < -20)
             Die();
     }
