@@ -11,36 +11,69 @@ public class TestingPlayerInteraction : MonoBehaviour
      * */
     string m_Path;
     string CustomFilePath = "D:/Profiles/student/LostGame/Yes";
-    string customFileName = "/Level1Test";
+    string sourcePath;
 
     void Start()
     {
-        customFileName += ".txt";
-
         //Get the path of the Game data folder
         m_Path = Application.dataPath;
-
-        string m_Path_With_String = CustomFilePath + customFileName;
-
-        //Output the Game data path to the console
-        Debug.Log("dataPath : " + m_Path);
-
-        //File.Copy(m_Path2 + "/Pog.txt", CustomFilePath, false);
-        File.WriteAllText(m_Path_With_String, "I have created txt");
+        sourcePath = m_Path + "/Source";
+        CopyFileToDir("Intro.txt", true);
+        CreateFileInDir("ThereIsNoEnd.txt", true);
 
 
-        /*
-        File.Create(CustomFilePath + "/SubSubFolder/folder.txt");
-        File.Move(m_Path_With_String, "");
-        */
-        
-        /*
-        if (!File.Exists(m_Path_With_String))
-        {
-            File.WriteAllText(m_Path, "I have created txt");
-        }
-        */
-        
-        
+
     }
+
+
+    /// <summary>
+    /// Copies a file from the source folder to the folder that the player can access 
+    /// </summary>
+    /// <param name="sourceFile">The name of the file being copied. WARNING THIS MUST INCLUDE THE ENDING EX: .txt</param>
+    /// <param name="overWrite">When true this will overwrite the file if it is already present.  When this is false if the file is present it will not write the file to the folder</param>
+    /// <returns></returns>
+    public void CopyFileToDir(string sourceFile, bool overWrite)
+    {
+        if (!overWrite)
+        {
+            File.Copy(sourcePath + "/" + sourceFile, CustomFilePath + "/" + sourceFile, true);
+        }
+        else
+        {
+            if (!File.Exists(CustomFilePath + "/" + sourceFile))
+            {
+                File.Copy(sourcePath + "/" + sourceFile, CustomFilePath + "/" + sourceFile, true);
+
+            }
+        }
+    }
+    /// <summary>
+    /// Creates a new file that the player can access
+    /// </summary>
+    /// <param name="FileName">The name of the file being created. WARNING THIS MUST INCLUDE THE ENDING EX: .txt</param>
+    /// <param name="overWrite">When true this will overwrite the file if it is already present.  When this is false if the file is present it will not write the file to the folder</param>
+    /// <returns></returns>
+    public void CreateFileInDir(string FileName, bool overWrite)
+    {
+        if (!overWrite)
+        {
+            if (!File.Exists(CustomFilePath + "/" + FileName))
+            {
+                File.Create(CustomFilePath + "/" + FileName);
+            }
+        }
+        else
+        {
+            if (!File.Exists(CustomFilePath + "/" + FileName))
+            {
+                File.Create(CustomFilePath + "/" + FileName);
+            }
+            else
+            {
+                File.Delete(sourcePath + "/" + FileName);
+                File.Create(CustomFilePath + "/" + FileName);
+            }
+        }
+    }
+
 }
