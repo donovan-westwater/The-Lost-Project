@@ -20,9 +20,6 @@ public class TestingPlayerInteraction : MonoBehaviour
         sourcePath = m_Path + "/Source";
         CopyFileToDir("Intro.txt", true);
         CreateFileInDir("ThereIsNoEnd.txt", true);
-
-
-
     }
 
 
