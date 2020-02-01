@@ -6,7 +6,7 @@ public class CheckPointSystem : MonoBehaviour
 {
     public CheckPoint[] checkPoints; // Array of checkpoints
 
-    // Get the transform of the most recent checkpoint
+    // Get the transform of the most recent checkpoint activated
     public Vector3 GetRecetCheckPointTransform()
     {
         for (int i = checkPoints.Length - 1; i >= 1; i--)
