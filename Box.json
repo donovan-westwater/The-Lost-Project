@@ -1,1 +1,4 @@
-{"isActive" : false}
+{
+"isActive" : false,
+"comment": "Demo"
+}
