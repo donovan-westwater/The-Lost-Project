@@ -17,7 +17,12 @@ public class BoxJson
 public class Glitch_Box : GlitchObject
 {
     bool isCollidable;
+<<<<<<< HEAD
     public TextMeshProUGUI text;
+=======
+
+    //public TextMeshProUGUI text;
+>>>>>>> 829937a9c8e053f89cbbf6888a980a965404526a
 
     private void Start()
     {
@@ -51,7 +56,7 @@ public class Glitch_Box : GlitchObject
 
         BoxJson obj = readJSON(jsontext);
         this.gameObject.transform.GetChild(0).gameObject.SetActive(obj.isActive);
-        text.text = obj.comment;
+        //text.text = obj.comment;
     }
     public override void RefreshData(string data)
     {
