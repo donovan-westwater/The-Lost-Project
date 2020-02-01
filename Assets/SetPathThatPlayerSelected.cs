@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using System.IO;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class SetPathThatPlayerSelected : MonoBehaviour
 {
@@ -26,5 +27,7 @@ public class SetPathThatPlayerSelected : MonoBehaviour
         File.Copy(FolderSingleton.instance.sourceFilePath + "/" + "intro" + ".txt", path2 + "/" + "intro" + ".txt", true);
 
         FolderSingleton.instance.playerSelectedFilePath = path2;
+
+        SceneManager.LoadScene("Testing mechanics");
     }
 }
