@@ -34,10 +34,6 @@ public class Wall : GlitchObject
         isCorrupted = obj.isActive;
 
     }
-    public override void RefreshData(string data)
-    {
-        print(data); //replace later
-    }
     //Turns the raw string info from the text file into the wall's seralized object
     public Filewall readJSON(string jsontext)
     {

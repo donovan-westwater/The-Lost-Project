@@ -4,12 +4,10 @@ using UnityEngine;
 
 public abstract class GlitchObject : MonoBehaviour
 {
+    [HideInInspector]
     public string playerSelectedFilePath;
+    [HideInInspector]
     public string jsonFileName;
-
-    public virtual void RefreshData(string data)
-    {
-    }
 
     public virtual void ApplyChange() { }
 

@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
-using System.Security.AccessControl;
-using TMPro;
 
 [System.Serializable]
-public class BoxJson
+public class WallConnected
 {
-    public bool isActive;
-   // public string comment;
+    public bool SetOneIsActive;
+    public bool SetTwonIsActive;
 }
 
-
-public class Glitch_Box : GlitchObject
+public class Glitch_WallConnected : GlitchObject
 {
-    bool isCollidable;
-    //public TextMeshProUGUI text;
+    public bool isSetOne = false;
 
     private void Start()
     {
-        jsonFileName = "Box";
+        jsonFileName = "WallConnected";
 
         if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
         {
@@ -31,34 +27,26 @@ public class Glitch_Box : GlitchObject
         File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F)) //This is test code, remove when implemented in player
-        {
-            ApplyChange();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Start();
-        }
-    }
-    //Applies changes from the file to the wall in game
     public override void ApplyChange()
     {
         string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
         string jsontext = System.IO.File.ReadAllText(filepath);
 
-        BoxJson obj = readJSON(jsontext);
-        this.gameObject.transform.GetChild(0).gameObject.SetActive(obj.isActive);
-        //text.text = obj.comment;
+        WallConnected obj = readJSON(jsontext);
+        if (obj.SetOneIsActive)
+        {
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(obj.SetOneIsActive);
+        }
+        else
+        {
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(obj.SetTwonIsActive);
+        }
     }
-    //Turns the raw string info from the text file into the wall's seralized object
-    public BoxJson readJSON(string jsontext)
+    public WallConnected readJSON(string jsontext)
     {
         try
         {
-            return JsonUtility.FromJson<BoxJson>(jsontext);
+            return JsonUtility.FromJson<WallConnected>(jsontext);
         }
         catch (Exception)
         {
@@ -70,7 +58,8 @@ public class Glitch_Box : GlitchObject
             }
             File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
             File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
-            return JsonUtility.FromJson<BoxJson>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
+
+            return JsonUtility.FromJson<WallConnected>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
         }
     }
 }
