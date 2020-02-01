@@ -10,14 +10,14 @@ using TMPro;
 public class BoxJson
 {
     public bool isActive;
-    public string comment;
+    //public string comment;
 }
 
 
 public class Glitch_Box : GlitchObject
 {
     bool isCollidable;
-    public TextMeshProUGUI text;
+    //public TextMeshProUGUI text;
 
     //public TextMeshProUGUI text;
 
