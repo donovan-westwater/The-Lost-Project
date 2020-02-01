@@ -13,19 +13,16 @@ public class Wall : MonoBehaviour
 {
     public string filename;
     bool isCorrupted = true;
-    void Start()
-    {
-        
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F)) //This is test code, remove when implemented in player
         {
             applyChange();
         }
     }
+    //Applies changes from the file to the wall in game
     void applyChange()
     {
         string filepath = "./" + filename + ".json";//Path.Combine(Directory.GetCurrentDirectory(),"../"+filename+".json");
@@ -36,6 +33,7 @@ public class Wall : MonoBehaviour
         isCorrupted = obj.isActive;
 
     }
+    //Turns the raw string info from the text file into the wall's seralized object
     public Filewall readJSON(string jsontext)
     {
         return JsonUtility.FromJson<Filewall>(jsontext);
