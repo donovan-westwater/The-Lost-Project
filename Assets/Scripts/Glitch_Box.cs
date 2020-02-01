@@ -17,7 +17,6 @@ public class BoxJson
 public class Glitch_Box : GlitchObject
 {
     bool isCollidable;
-
     public TextMeshProUGUI text;
 
     private void Start()
