@@ -32,6 +32,7 @@ public class KeyScript : GlitchObject
     public string newFileToGenerate;
 
     bool SendToNextLevel = false;
+    public bool isFirstOne = false;
     AudioSource source;
 
     private void Start()
@@ -43,6 +44,20 @@ public class KeyScript : GlitchObject
         File.Delete(playerSelectedFilePath + "/" + "WallConnected" + ".json");
 
         ApplyChanges();
+
+        Invoke("TelePlayer", 0.1f);
+
+        
+    }
+
+    void TelePlayer()
+    {
+        if (isFirstOne)
+        {
+            player.SetActive(false);
+            player.transform.position = startingTransform.transform.position;
+            player.SetActive(true);
+        }
     }
 
     public override void ApplyChange()
