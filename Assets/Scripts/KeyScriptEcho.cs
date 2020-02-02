@@ -9,6 +9,7 @@ public class KeyScriptEcho : MonoBehaviour
     public bool wasClicked = false;
     public GameObject offGraphic;
     public GameObject onGraphic;
+    public GameObject resetArea;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,5 +19,17 @@ public class KeyScriptEcho : MonoBehaviour
         hostScript.ApplyChanges();
         hostScript.CheckKeys();
 
+
+        Invoke("ResetArea", 0.1f);
+    }
+
+    void ResetArea()
+    {
+        if (resetArea != null)
+        {
+            hostScript.player.SetActive(false);
+            hostScript.player.transform.position = resetArea.transform.position;
+            hostScript.player.SetActive(true);
+        }
     }
 }
