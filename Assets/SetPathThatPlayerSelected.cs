@@ -22,18 +22,6 @@ public class SetPathThatPlayerSelected : MonoBehaviour
 
         File.SetAttributes(path3, FileAttributes.Normal);
 
-
-        //if (!Directory.Exists(path3))
-
-            if (!File.Exists(path3 + "/" + "intro" + ".txt"))
-        {
-            File.Delete(path3 + "/" + "intro" + ".txt");
-        }
-
-        File.Create(path3 + "/" + "intro" + ".txt").Dispose();
-
-        File.Copy(FolderSingleton.instance.sourceFilePath + "/" + "intro" + ".txt", path3 + "/" + "intro" + ".txt", true);
-
         FolderSingleton.instance.playerSelectedFilePath = path3;
 
         SceneManager.LoadScene("Tutorial");

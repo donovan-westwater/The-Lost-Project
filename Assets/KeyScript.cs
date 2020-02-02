@@ -2,24 +2,77 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
+using System;
+using System.IO;
+using System.Security.AccessControl;
+using UnityEngine.SceneManagement;
 
-public class KeyScript : MonoBehaviour
+
+[System.Serializable]
+public class KeyJson
+{
+    public bool SendToNextLevel;
+}
+
+public class KeyScript : GlitchObject
 {
     public GameObject player;
-    public bool resetPlayer;
     Vector3 playerStartingPos;
     Quaternion playerStartingRot;
     public GlitchObject[] glitches;
+    public KeyScriptEcho[] keys;
+    public GameObject offGraphic;
+    public GameObject onGraphic;
+    public GameObject startingTransform;
+
+    bool SendToNextLevel = false;
 
     private void Start()
     {
-        playerStartingPos = player.transform.position;
-        playerStartingRot = player.transform.rotation;
+        jsonFileName = "Key";
+        playerStartingPos = startingTransform.transform.position;
+        playerStartingRot = startingTransform.transform.rotation;
 
-        OnTriggerEnter(this.GetComponent<Collider>());
+        ApplyChanges();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void ApplyChange()
+    {
+        jsonFileName = "Key";
+        string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
+        string jsontext = System.IO.File.ReadAllText(filepath);
+
+        KeyJson obj = readJSON(jsontext);
+        if (obj.SendToNextLevel)
+        {
+            SceneManager.LoadScene("FinalLevel");
+        }
+    }
+    
+    public KeyJson readJSON(string jsontext)
+    {
+        try
+        {
+            return JsonUtility.FromJson<KeyJson>(jsontext);
+        }
+        catch (Exception)
+        {
+            Debug.Log("INVALID JSON RESETING");
+
+            if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
+            {
+                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
+            }
+            File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
+            File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
+            return JsonUtility.FromJson<KeyJson>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
+        }
+    }
+
+
+
+
+    public void ApplyChanges()
     {
         player.gameObject.SetActive(false);
         player.transform.position = playerStartingPos;
@@ -30,5 +83,25 @@ public class KeyScript : MonoBehaviour
         {
             glitch.ApplyChange();
         }
+    }
+
+    public void CheckKeys()
+    {
+        foreach (KeyScriptEcho key in keys)
+        {
+            if (key.wasClicked == false)
+            {
+                return;
+            }
+        }
+
+        CreateJSON(jsonFileName);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        offGraphic.SetActive(false);
+        onGraphic.SetActive(true);
+        ApplyChanges();
     }
 }

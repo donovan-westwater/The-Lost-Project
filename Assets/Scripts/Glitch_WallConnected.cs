@@ -30,6 +30,7 @@ public class Glitch_WallConnected : GlitchObject
 
     public override void ApplyChange()
     {
+        jsonFileName = "WallConnected";
         string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
         string jsontext = System.IO.File.ReadAllText(filepath);
 
