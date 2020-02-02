@@ -14,6 +14,7 @@ public class KeyJson
     public bool SendToNextLevel;
 }
 
+[RequireComponent(typeof(AudioSource))]
 public class KeyScript : GlitchObject
 {
     public GameObject player;
@@ -30,12 +31,14 @@ public class KeyScript : GlitchObject
     public string newFileToGenerate;
 
     bool SendToNextLevel = false;
+    AudioSource source;
 
     private void Start()
     {
         jsonFileName = "Key";
         playerStartingPos = startingTransform.transform.position;
         playerStartingRot = startingTransform.transform.rotation;
+        source = this.GetComponent<AudioSource>();
 
         ApplyChanges();
     }
@@ -115,6 +118,7 @@ public class KeyScript : GlitchObject
             }
         }
 
+        source.Play();
         CreateJSON(jsonFileName);
     }
 
