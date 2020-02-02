@@ -6,6 +6,10 @@ using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 
 public class SetPathThatPlayerSelected : MonoBehaviour
 {
@@ -13,12 +17,9 @@ public class SetPathThatPlayerSelected : MonoBehaviour
 
     public void SetPath()
     {
-        path = EditorUtility.OpenFilePanel("Overwrite with png", "", "");
-
-        File.Create(Path.GetFullPath(path)).Dispose();
-        Debug.Log(Path.GetDirectoryName(path));
-        string path2 = Path.GetDirectoryName(path);
-        File.Delete(path);
+        string path = EditorUtility.SaveFolderPanel("Save textures to folder", "", "");
+        
+        string path2 = path;
         if (!File.Exists(path2 + "/" + "intro" + ".txt"))
         {
             File.Delete(path2 + "/" + "intro" + ".txt");
@@ -29,5 +30,7 @@ public class SetPathThatPlayerSelected : MonoBehaviour
         FolderSingleton.instance.playerSelectedFilePath = path2;
 
         SceneManager.LoadScene("Testing mechanics");
+
+        
     }
 }
