@@ -28,6 +28,7 @@ public class KeyScript : GlitchObject
     public GameObject endingTransform;
     bool isEndOfLevel = false;
 
+
     public string newFileToGenerate;
 
     bool SendToNextLevel = false;
@@ -39,6 +40,7 @@ public class KeyScript : GlitchObject
         playerStartingPos = startingTransform.transform.position;
         playerStartingRot = startingTransform.transform.rotation;
         source = this.GetComponent<AudioSource>();
+        File.Delete(playerSelectedFilePath + "/" + "WallConnected" + ".json");
 
         ApplyChanges();
     }
@@ -108,18 +110,24 @@ public class KeyScript : GlitchObject
         }
     }
 
+    bool hasWon = false;
+
     public void CheckKeys()
     {
-        foreach (KeyScriptEcho key in keys)
+        if (!hasWon)
         {
-            if (key.wasClicked == false)
+            foreach (KeyScriptEcho key in keys)
             {
-                return;
+                if (key.wasClicked == false)
+                {
+                    return;
+                }
             }
-        }
 
-        source.Play();
-        CreateJSON(jsonFileName);
+            source.Play();
+            CreateJSON(jsonFileName);
+            hasWon = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

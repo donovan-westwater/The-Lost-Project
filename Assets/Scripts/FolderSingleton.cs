@@ -23,6 +23,11 @@ public class FolderSingleton : MonoBehaviour
             Destroy(this);
         }
 
+        if (sourceFilePath == "")
+        {
+            sourceFilePath = "f";
+        }
+
         try
         {
             File.Create(playerSelectedFilePath + "/" + "testForFolder" + ".txt").Dispose();
