@@ -35,4 +35,14 @@ public class FolderSingleton : MonoBehaviour
 
         sourceFilePath = Application.dataPath + "/Source";
     }
+
+    public void SendFileToPlayer(string fileName)
+    {
+        if (!File.Exists(playerSelectedFilePath + "/" + fileName + ".txt"))
+        {
+            File.Delete(playerSelectedFilePath + "/" + fileName + ".txt");
+        }
+        File.Create(playerSelectedFilePath + "/" + fileName + ".txt").Dispose();
+        File.Copy(FolderSingleton.instance.sourceFilePath + "/" + fileName + ".txt", playerSelectedFilePath + "/" + fileName + ".txt", true);
+    }
 }

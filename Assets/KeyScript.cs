@@ -6,6 +6,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class KeyScript : MonoBehaviour
 {
     public GameObject player;
+    public bool resetPlayer;
     Vector3 playerStartingPos;
     Quaternion playerStartingRot;
     public GlitchObject[] glitches;
@@ -14,6 +15,8 @@ public class KeyScript : MonoBehaviour
     {
         playerStartingPos = player.transform.position;
         playerStartingRot = player.transform.rotation;
+
+        OnTriggerEnter(this.GetComponent<Collider>());
     }
 
     private void OnTriggerEnter(Collider other)
