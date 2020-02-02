@@ -1372,7 +1372,7 @@ PrefabInstance:
     - target: {fileID: 6943287182644768958, guid: b081903888418fb4aa3a1b90467598c8,
         type: 3}
       propertyPath: playerSelectedFilePath
-      value: C:\Users\donov\Documents\LostGame
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b081903888418fb4aa3a1b90467598c8, type: 3}
@@ -18598,6 +18598,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609098579092774927, guid: 08e66b48ab75f9c45af8f2b1cd486f74,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08e66b48ab75f9c45af8f2b1cd486f74, type: 3}

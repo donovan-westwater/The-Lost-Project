@@ -10583,7 +10583,7 @@ PrefabInstance:
     - target: {fileID: 6943287182644768958, guid: b081903888418fb4aa3a1b90467598c8,
         type: 3}
       propertyPath: playerSelectedFilePath
-      value: afasfd
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b081903888418fb4aa3a1b90467598c8, type: 3}
