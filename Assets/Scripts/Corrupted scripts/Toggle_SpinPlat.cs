@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
-public class Spinning_Object
+[Serializable]
+public class SpinningPlatform
 {
-   public bool isSpinning;
+    public bool isMoving;
+    public bool isSpinning;
 }
-public class Toggle_Rot : GlitchObject
+public class Toggle_SpinPlat : GlitchObject
 {
     public bool spin = true;
+    public bool move = true;
+    bool reverse = false;
+    public float travelDist = 50f;
+    float currentDis = 0;
+    Vector3 startingDir;
     // Start is called before the first frame update
     private void Start()
     {
-        jsonFileName = "Spin";
+        jsonFileName = "SpinningPlatform";
+        startingDir = this.transform.forward;
 
         if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
         {
@@ -25,7 +33,24 @@ public class Toggle_Rot : GlitchObject
     // Update is called once per frame
     void Update()
     {
-        if (spin) this.transform.rotation *= Quaternion.Euler(50f * Time.deltaTime, 0, 0);
+        //Debug.Log("IM RUNNING");
+        if (spin) this.transform.RotateAround(this.transform.position, new Vector3(0, 1, 0), 15f * Time.deltaTime);
+        if (move)
+        {
+            if (!reverse)
+            {
+                if (currentDis > travelDist) reverse = true;
+                this.transform.position += 5 * startingDir * Time.deltaTime;
+                currentDis += 5 * this.startingDir.magnitude * Time.deltaTime;
+            }
+            else if (reverse)
+            {
+                if (currentDis < 0) reverse = false;
+                this.transform.position -= 5 * startingDir * Time.deltaTime;
+                currentDis -= 5 * startingDir.magnitude * Time.deltaTime;
+            }
+
+        }
         if (Input.GetKeyDown(KeyCode.F)) //This is test code, remove when implemented in player
         {
             ApplyChange();
@@ -40,16 +65,17 @@ public class Toggle_Rot : GlitchObject
         string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
         string jsontext = System.IO.File.ReadAllText(filepath);
 
-        Spinning_Object obj = readJSON(jsontext);
+        SpinningPlatform obj = readJSON(jsontext);
+        move = obj.isMoving;
         spin = obj.isSpinning;
 
     }
     //Turns the raw string info from the text file into the wall's seralized object
-    public Spinning_Object readJSON(string jsontext)
+    public SpinningPlatform readJSON(string jsontext)
     {
         try
         {
-            return JsonUtility.FromJson<Spinning_Object>(jsontext);
+            return JsonUtility.FromJson<SpinningPlatform>(jsontext);
         }
         catch (Exception)
         {
@@ -61,7 +87,7 @@ public class Toggle_Rot : GlitchObject
             }
             File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
             File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
-            return JsonUtility.FromJson<Spinning_Object>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
+            return JsonUtility.FromJson<SpinningPlatform>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
         }
 
     }
