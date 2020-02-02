@@ -10,26 +10,33 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Security.AccessControl;
 
 public class SetPathThatPlayerSelected : MonoBehaviour
 {
-    string path;
-
     public void SetPath()
     {
-        string path = EditorUtility.SaveFolderPanel("Save textures to folder", "", "");
+        string path3 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/LostGame";
         
-        string path2 = path;
-        if (!File.Exists(path2 + "/" + "intro" + ".txt"))
+        DirectoryInfo dir = Directory.CreateDirectory(path3);
+
+        File.SetAttributes(path3, FileAttributes.Normal);
+
+
+        //if (!Directory.Exists(path3))
+
+            if (!File.Exists(path3 + "/" + "intro" + ".txt"))
         {
-            File.Delete(path2 + "/" + "intro" + ".txt");
+            File.Delete(path3 + "/" + "intro" + ".txt");
         }
-        File.Create(path2 + "/" + "intro" + ".txt").Dispose();
-        File.Copy(FolderSingleton.instance.sourceFilePath + "/" + "intro" + ".txt", path2 + "/" + "intro" + ".txt", true);
 
-        FolderSingleton.instance.playerSelectedFilePath = path2;
+        File.Create(path3 + "/" + "intro" + ".txt").Dispose();
 
-        SceneManager.LoadScene("Testing mechanics");
+        File.Copy(FolderSingleton.instance.sourceFilePath + "/" + "intro" + ".txt", path3 + "/" + "intro" + ".txt", true);
+
+        FolderSingleton.instance.playerSelectedFilePath = path3;
+
+        SceneManager.LoadScene("Tutorial");
 
         
     }
