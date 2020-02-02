@@ -24,7 +24,7 @@ public class TextTrigger : MonoBehaviour
     void Update()
     {
         this.transform.eulerAngles += new Vector3(0, Time.deltaTime * 15f, 0);
-        if(Vector3.Distance(Player.transform.position,this.transform.position) < triggerRadius && !popupmode)
+        if (Vector3.Distance(Player.transform.position,this.transform.position) < triggerRadius && !popupmode)
         {
             popupmode = true;
             PopUpToggle(true);
