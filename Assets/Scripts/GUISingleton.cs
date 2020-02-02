@@ -32,6 +32,7 @@ public class GUISingleton : MonoBehaviour
 
     public void PauseGame(bool isPausing)
     {
+        Invoke("FixCursor", 0.5f);
         isPaused = isPausing;
 
         if (isPausing)
@@ -54,6 +55,14 @@ public class GUISingleton : MonoBehaviour
         normalGUI.SetActive(true);
         pauseGUI.SetActive(false);
         SceneManager.LoadScene("InputFolder");
+        Invoke("FixCursor", 0.5f);
+    }
+
+    void FixCursor()
+    {
+        Debug.Log("a");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void QuitGame()
