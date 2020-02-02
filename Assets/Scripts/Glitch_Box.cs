@@ -9,7 +9,7 @@ using TMPro;
 [System.Serializable]
 public class BoxJson
 {
-    public bool isActive;
+    public bool canCollide;
    // public string comment;
 }
 
@@ -51,7 +51,7 @@ public class Glitch_Box : GlitchObject
 
         BoxJson obj = readJSON(jsontext);
         //this.gameObject.transform.GetChild(0).gameObject.SetActive(obj.isActive);
-        this.gameObject.transform.GetChild(0).GetComponent<Collider>().enabled = obj.isActive;
+        this.gameObject.transform.GetChild(0).GetComponent<Collider>().enabled = obj.canCollide;
         //text.text = obj.comment;
     }
     //Turns the raw string info from the text file into the wall's seralized object
