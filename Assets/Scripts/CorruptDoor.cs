@@ -16,13 +16,6 @@ public class CorruptDoor : GlitchObject
     private void Start()
     {
         jsonFileName = "door";
-
-        if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
-        {
-            File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-        }
-        File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
-        File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
     }
 
     void Update()

@@ -23,7 +23,7 @@ public class TextTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.eulerAngles += new Vector3(0, Time.deltaTime * 15f, 0);
+        this.transform.eulerAngles += new Vector3(0, Time.deltaTime * 45f, 0);
         if (Vector3.Distance(Player.transform.position,this.transform.position) < triggerRadius && !popupmode)
         {
             popupmode = true;
