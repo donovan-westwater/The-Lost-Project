@@ -24,6 +24,10 @@ public class KeyScript : GlitchObject
     public GameObject offGraphic;
     public GameObject onGraphic;
     public GameObject startingTransform;
+    public GameObject endingTransform;
+    bool isEndOfLevel = false;
+
+    public string newFileToGenerate;
 
     bool SendToNextLevel = false;
 
@@ -39,16 +43,32 @@ public class KeyScript : GlitchObject
     public override void ApplyChange()
     {
         jsonFileName = "Key";
-        string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
-        string jsontext = System.IO.File.ReadAllText(filepath);
-
-        KeyJson obj = readJSON(jsontext);
-        if (obj.SendToNextLevel)
+        if (File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
         {
-            SceneManager.LoadScene("FinalLevel");
+            string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
+            string jsontext = System.IO.File.ReadAllText(filepath);
+
+            KeyJson obj = readJSON(jsontext);
+            if (obj.SendToNextLevel)
+            {
+                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
+                File.Delete(playerSelectedFilePath + "/" + "WallConnected" + ".json");
+                File.Delete(playerSelectedFilePath + "/" + "Flip" + ".json");
+                player.SetActive(false);
+                if (newFileToGenerate != "")
+                {
+                    FolderSingleton.instance.SendFileToPlayer(newFileToGenerate + ".json");
+                }
+                player.transform.position = endingTransform.transform.position;
+                player.SetActive(true);
+                if (isEndOfLevel == true)
+                {
+                    SceneManager.LoadScene("FinalLevel");
+                }
+            }
         }
     }
-    
+
     public KeyJson readJSON(string jsontext)
     {
         try
