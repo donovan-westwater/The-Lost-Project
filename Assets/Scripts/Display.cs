@@ -8,16 +8,18 @@ public class Display : MonoBehaviour
     public TextMeshProUGUI Text;
     public int number;
     public Player player;
+    public GameObject bridge1;
+    public GameObject bridge2;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,18 +27,16 @@ public class Display : MonoBehaviour
         if (other.tag == "Player")
         {
             Text.gameObject.SetActive(true);
-            if (number==0)
-            {
-                Text.text = (player.weapon == null) ? "You need a hammer to repair!" : "Press left Click to repair";
-            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetMouseButton(1) && player.weapon!=null)
+        Text.text = (bridge1.activeSelf) ? (player.weapon == null) ? "You need a hammer to repair!" : "Press left Click to repair" : "Walk across";
+        if (Input.GetMouseButton(0) && player.weapon!=null)
         {
-            print("repaired");
+            bridge1.SetActive(false);
+            bridge2.SetActive(true);
         }
     }
 

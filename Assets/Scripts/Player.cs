@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     public GameObject weapon;
     private new Camera camera;
     public TextMeshProUGUI text;
+    public GameObject bridge1;
+    public GameObject bridge2;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,14 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (Input.GetMouseButtonDown(1) && weapon!=null)
+        {
+            weapon.transform.parent = null;
+            text.gameObject.SetActive(false);
+            weapon.GetComponent<Rigidbody>().isKinematic = false;
+            weapon = null;
         }
 
         // If the player falls to his death, respawn them at the nearest checkpoint
@@ -57,5 +67,11 @@ public class Player : MonoBehaviour
     {
         weapon = obj;
         obj.transform.parent = camera.transform;
+        weapon.transform.position += transform.TransformDirection(Vector3.forward * 1f);
+        weapon.transform.position += transform.TransformDirection(Vector3.right * 1f);
+        weapon.transform.eulerAngles = new Vector3(0, 0, 0);
+        text.gameObject.SetActive(true);
+        text.text = "Left click to drop.";
+        weapon.GetComponent<Rigidbody>().isKinematic = true;
     }
 }

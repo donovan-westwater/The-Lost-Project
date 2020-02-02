@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hammer : MonoBehaviour
 {
-
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +14,11 @@ public class Hammer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (collider.tag == "Player")
+        print(Vector3.Distance(player.transform.position, transform.position));
+        if (Vector3.Distance(player.transform.position,transform.position) < 1.5f && transform.parent == null)
         {
-            collider.GetComponent<Player>().PickUpWeapon(gameObject);
+            print("here");
+            player.GetComponent<Player>().PickUpWeapon(gameObject);
         }
     }
 }
