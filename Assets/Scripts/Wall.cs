@@ -26,6 +26,7 @@ public class Wall : GlitchObject
     //Applies changes from the file to the wall in game
     public override void ApplyChange()
     {
+
         string filepath = "./" + filename + ".json";//Path.Combine(Directory.GetCurrentDirectory(),"../"+filename+".json");
         string jsontext = System.IO.File.ReadAllText(filepath);
         Filewall obj = readJSON(jsontext);
