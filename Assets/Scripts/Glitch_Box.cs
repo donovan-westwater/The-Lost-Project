@@ -21,7 +21,7 @@ public class Glitch_Box : GlitchObject
 
     private void Start()
     {
-        jsonFileName = "Box";
+        jsonFileName = "wall";
 
         if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
         {

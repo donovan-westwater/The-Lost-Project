@@ -20,7 +20,7 @@ public class Message : MonoBehaviour
         {
             text.txt.text = "This door leads to the first level! But it's corrupted! Go to Documents/LostGame and right click on door.json and uncorrupt the door with notepad or notepad++!!! Make sure to save! Press F in the game to refresh then Touch the door!";
         }
-
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,6 +34,28 @@ public class Message : MonoBehaviour
             if (messageNumber == 1)
             {
                 FolderSingleton.instance.SendFileToPlayer("door.json");
+            }
+            if (messageNumber == 2)
+            {
+                FolderSingleton.instance.SendFileToPlayer("wall.json");
+
+            }
+            if (messageNumber == 3)
+            {
+                FolderSingleton.instance.SendFileToPlayer("spin.json");
+            }
+            if (messageNumber == 4)
+            {
+                FolderSingleton.instance.SendFileToPlayer("MovingPlatform.json");
+            }
+            if (messageNumber == 5)
+            {
+                FolderSingleton.instance.SendFileToPlayer("SpinAndMove.json");
+            }
+            if (messageNumber == 6)
+            {
+                FolderSingleton.instance.SendFileToPlayer("spin.json");
+                FolderSingleton.instance.SendFileToPlayer("MovingPlatform.json");
             }
         }
     }
