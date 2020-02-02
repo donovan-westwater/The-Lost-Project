@@ -51,8 +51,9 @@ public class GUISingleton : MonoBehaviour
     public void ReturnToMenu()
     {
         Time.timeScale = 1;
+        normalGUI.SetActive(true);
+        pauseGUI.SetActive(false);
         SceneManager.LoadScene("InputFolder");
-        Destroy(this);
     }
 
     public void QuitGame()
@@ -65,6 +66,7 @@ public class GUISingleton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("InputFolder"))
             PauseGame(!isPaused);
         }
     }
