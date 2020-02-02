@@ -10,6 +10,7 @@ public class MovingPlatform
 }
 public class Toggle_Platform : GlitchObject
 {
+    public Vector3 dir;
     public bool move = true;
     bool reverse = false;
     public float travelDist = 50f;
@@ -34,14 +35,14 @@ public class Toggle_Platform : GlitchObject
             if(!reverse)
             {
                 if (currentDis > travelDist) reverse = true;
-                this.transform.position += 5 * this.transform.forward * Time.deltaTime;
-                currentDis += 5 * this.transform.forward.magnitude * Time.deltaTime;
+                this.transform.position += 5 * dir.normalized * Time.deltaTime;
+                currentDis += 5 * dir.normalized.magnitude * Time.deltaTime;
             }
             else if(reverse)
             {
                 if (currentDis < 0) reverse = false;
-                this.transform.position -= 5 * this.transform.forward * Time.deltaTime;
-                currentDis -= 5 * this.transform.forward.magnitude * Time.deltaTime;
+                this.transform.position -= 5 * dir.normalized * Time.deltaTime;
+                currentDis -= 5 * dir.normalized.magnitude * Time.deltaTime;
             }
             
         }

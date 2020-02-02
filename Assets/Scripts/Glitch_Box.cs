@@ -50,7 +50,8 @@ public class Glitch_Box : GlitchObject
         string jsontext = System.IO.File.ReadAllText(filepath);
 
         BoxJson obj = readJSON(jsontext);
-        this.gameObject.transform.GetChild(0).gameObject.SetActive(obj.isActive);
+        //this.gameObject.transform.GetChild(0).gameObject.SetActive(obj.isActive);
+        this.gameObject.transform.GetChild(0).GetComponent<Collider>().enabled = obj.isActive;
         //text.text = obj.comment;
     }
     //Turns the raw string info from the text file into the wall's seralized object

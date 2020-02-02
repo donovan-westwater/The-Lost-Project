@@ -20,7 +20,7 @@ public class Toggle_SpinPlat : GlitchObject
     // Start is called before the first frame update
     private void Start()
     {
-        jsonFileName = "SpinningPlatform";
+        jsonFileName = "SpinAndMove";
         startingDir = this.transform.forward;
 
         if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
@@ -34,20 +34,20 @@ public class Toggle_SpinPlat : GlitchObject
     void Update()
     {
         //Debug.Log("IM RUNNING");
-        if (spin) this.transform.RotateAround(this.transform.position, new Vector3(0, 1, 0), 15f * Time.deltaTime);
+        if (spin) this.transform.RotateAround(this.transform.position, new Vector3(0, 1, 0), 75f * Time.deltaTime);
         if (move)
         {
             if (!reverse)
             {
                 if (currentDis > travelDist) reverse = true;
-                this.transform.position += 5 * startingDir * Time.deltaTime;
-                currentDis += 5 * this.startingDir.magnitude * Time.deltaTime;
+                this.transform.position += 10 * startingDir * Time.deltaTime;
+                currentDis +=10 * this.startingDir.magnitude * Time.deltaTime;
             }
             else if (reverse)
             {
                 if (currentDis < 0) reverse = false;
-                this.transform.position -= 5 * startingDir * Time.deltaTime;
-                currentDis -= 5 * startingDir.magnitude * Time.deltaTime;
+                this.transform.position -= 10 * startingDir * Time.deltaTime;
+                currentDis -= 10 * startingDir.magnitude * Time.deltaTime;
             }
 
         }

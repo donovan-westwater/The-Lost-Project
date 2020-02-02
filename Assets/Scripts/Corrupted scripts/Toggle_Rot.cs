@@ -10,6 +10,7 @@ public class Spinning_Object
 public class Toggle_Rot : GlitchObject
 {
     public bool spin = true;
+    public Vector3 spindir;
     // Start is called before the first frame update
     private void Start()
     {
@@ -25,7 +26,7 @@ public class Toggle_Rot : GlitchObject
     // Update is called once per frame
     void Update()
     {
-        if (spin) this.transform.rotation *= Quaternion.Euler(50f * Time.deltaTime, 0, 0);
+        if (spin) this.transform.rotation *= Quaternion.Euler(spindir.x * Time.deltaTime, spindir.y * Time.deltaTime, spindir.z * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.F)) //This is test code, remove when implemented in player
         {
             ApplyChange();
