@@ -4488,6 +4488,7 @@ MonoBehaviour:
   onGraphic: {fileID: 1113388728}
   startingTransform: {fileID: 1487486180}
   endingTransform: {fileID: 1028649823}
+  isEndOfLevel: 1
   newFileToGenerate: 
   isFirstOne: 0
 --- !u!82 &999040574
@@ -6575,6 +6576,7 @@ MonoBehaviour:
   onGraphic: {fileID: 1707433864}
   startingTransform: {fileID: 1062178528}
   endingTransform: {fileID: 2081392659}
+  isEndOfLevel: 0
   newFileToGenerate: Flip
   isFirstOne: 1
 --- !u!82 &1450593063
@@ -8485,6 +8487,7 @@ MonoBehaviour:
   onGraphic: {fileID: 1110388993}
   startingTransform: {fileID: 2081392659}
   endingTransform: {fileID: 1487486180}
+  isEndOfLevel: 0
   newFileToGenerate: WallConnected
   isFirstOne: 0
 --- !u!65 &1745219182

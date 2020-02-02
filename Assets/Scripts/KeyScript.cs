@@ -26,7 +26,7 @@ public class KeyScript : GlitchObject
     public GameObject onGraphic;
     public GameObject startingTransform;
     public GameObject endingTransform;
-    bool isEndOfLevel = false;
+    public bool isEndOfLevel = false;
 
 
     public string newFileToGenerate;
@@ -74,11 +74,11 @@ public class KeyScript : GlitchObject
                 File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
                 File.Delete(playerSelectedFilePath + "/" + "WallConnected" + ".json");
                 File.Delete(playerSelectedFilePath + "/" + "Flip" + ".json");
-                player.SetActive(false);
                 if (newFileToGenerate != "")
                 {
                     FolderSingleton.instance.SendFileToPlayer(newFileToGenerate + ".json");
                 }
+                player.SetActive(false);
                 player.transform.position = endingTransform.transform.position;
                 player.SetActive(true);
                 if (isEndOfLevel == true)
