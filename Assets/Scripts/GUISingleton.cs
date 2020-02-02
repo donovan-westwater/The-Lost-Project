@@ -8,7 +8,7 @@ public class GUISingleton : MonoBehaviour
     public GameObject normalGUI;
     public GameObject pauseGUI;
     
-    [HideInInspector] public GUISingleton instance;
+    [HideInInspector] public static GUISingleton instance;
 
     bool isPaused;
 
