@@ -24,6 +24,7 @@ public class KeyScript : GlitchObject
     public GameObject offGraphic;
     public GameObject onGraphic;
     public GameObject startingTransform;
+    public GameObject endingTransform;
 
     bool SendToNextLevel = false;
 
@@ -45,7 +46,19 @@ public class KeyScript : GlitchObject
         KeyJson obj = readJSON(jsontext);
         if (obj.SendToNextLevel)
         {
-            SceneManager.LoadScene("FinalLevel");
+            player.transform.position = endingTransform.transform.position;
+            if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
+            {
+                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
+            }
+            if (!File.Exists(playerSelectedFilePath + "/" + "WallConnected" + ".json"))
+            {
+                File.Delete(playerSelectedFilePath + "/" + "WallConnected" + ".json");
+            }
+            if (!File.Exists(playerSelectedFilePath + "/" + "Flip" + ".json"))
+            {
+                File.Delete(playerSelectedFilePath + "/" + "Flip" + ".json");
+            }
         }
     }
     
