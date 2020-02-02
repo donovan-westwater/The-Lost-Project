@@ -12,8 +12,6 @@ public class Player : MonoBehaviour
     public GameObject weapon;
     private new Camera camera;
     public TextMeshProUGUI text;
-    public GameObject bridge1;
-    public GameObject bridge2;
 
     // Start is called before the first frame update
     void Start()
