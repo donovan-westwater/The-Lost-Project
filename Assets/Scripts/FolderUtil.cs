@@ -5,7 +5,7 @@ using System.IO;
 using System.Security.AccessControl;
 using System;
 using static System.Environment;
-public static class FolderSingleton
+public static class FolderUtil
 {
     [HideInInspector] public static string playerSelectedFilePath { get { return SpecialFolder.MyDocuments + "/TheLostGame"; } }
 

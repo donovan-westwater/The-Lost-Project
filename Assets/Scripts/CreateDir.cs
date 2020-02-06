@@ -7,7 +7,7 @@ public class CreateDir : MonoBehaviour
 {
     private void Awake()
     {
-        if (!Directory.Exists(FolderSingleton.playerSelectedFilePath))
-            Directory.CreateDirectory(FolderSingleton.playerSelectedFilePath);
+        if (!Directory.Exists(FolderUtil.playerSelectedFilePath))
+            Directory.CreateDirectory(FolderUtil.playerSelectedFilePath);
     }
 }

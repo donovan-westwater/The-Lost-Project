@@ -13,31 +13,31 @@ public abstract class GlitchObject : MonoBehaviour
 
     public static void CreateJSON(string jsonName)
     {
-        FolderSingleton.SendFileToPlayer(jsonName + ".json");
+        FolderUtil.SendFileToPlayer(jsonName + ".json");
     }
 
     public static void DeleteJSON(string jsonName)
     {
-        FolderSingleton.DeleteFileFromPlayer(jsonName + ".json");
+        FolderUtil.DeleteFileFromPlayer(jsonName + ".json");
     }
 
     public static bool IExist(GlitchObject gObject)
     {
-        return FolderSingleton.DoesFileExistForPlayer(gObject.jsonFileName + ".json");
+        return FolderUtil.DoesFileExistForPlayer(gObject.jsonFileName + ".json");
     }
 
     public static T ReadJSON<T>(GlitchObject gObject)
     {
         try
         {
-            return JsonUtility.FromJson<T>(FolderSingleton.GetFullTextFromPlayer(gObject.jsonFileName));
+            return JsonUtility.FromJson<T>(FolderUtil.GetFullTextFromPlayer(gObject.jsonFileName));
         }
         catch (Exception)
         {
             Debug.Log("INVALID JSON RESETING");
             CreateJSON(gObject.jsonFileName);
 
-            return JsonUtility.FromJson<T>(FolderSingleton.GetFullTextFromSource(gObject.jsonFileName));
+            return JsonUtility.FromJson<T>(FolderUtil.GetFullTextFromSource(gObject.jsonFileName));
         }
     }
 }
