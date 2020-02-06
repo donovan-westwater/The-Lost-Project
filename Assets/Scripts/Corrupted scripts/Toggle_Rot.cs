@@ -15,13 +15,7 @@ public class Toggle_Rot : GlitchObject
     private void Start()
     {
         jsonFileName = "Spin";
-
-        if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
-        {
-            File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-        }
-        File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
-        File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
+        CreateJSON(jsonFileName);
     }
     // Update is called once per frame
     void Update()
@@ -38,32 +32,7 @@ public class Toggle_Rot : GlitchObject
     }
     public override void ApplyChange()
     {
-        string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
-        string jsontext = System.IO.File.ReadAllText(filepath);
-
-        Spinning_Object obj = readJSON(jsontext);
+        Spinning_Object obj = ReadJSON<Spinning_Object>(this);
         spin = obj.isSpinning;
-
-    }
-    //Turns the raw string info from the text file into the wall's seralized object
-    public Spinning_Object readJSON(string jsontext)
-    {
-        try
-        {
-            return JsonUtility.FromJson<Spinning_Object>(jsontext);
-        }
-        catch (Exception)
-        {
-            Debug.Log("INVALID JSON RESETING");
-
-            if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
-            {
-                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-            }
-            File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
-            File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
-            return JsonUtility.FromJson<Spinning_Object>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
-        }
-
     }
 }

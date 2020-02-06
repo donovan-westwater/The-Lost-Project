@@ -60,7 +60,6 @@ public class GUISingleton : MonoBehaviour
 
     void FixCursor()
     {
-        Debug.Log("a");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

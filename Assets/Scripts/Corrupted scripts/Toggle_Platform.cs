@@ -19,13 +19,7 @@ public class Toggle_Platform : GlitchObject
     private void Start()
     {
         jsonFileName = "MovingPlatform";
-
-        if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
-        {
-            File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-        }
-        File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
-        File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
+        CreateJSON(jsonFileName);
     }
     // Update is called once per frame
     void Update()
@@ -60,29 +54,8 @@ public class Toggle_Platform : GlitchObject
         string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
         string jsontext = System.IO.File.ReadAllText(filepath);
 
-        MovingPlatform obj = readJSON(jsontext);
+        MovingPlatform obj = ReadJSON<MovingPlatform>(this);
         move = obj.isMoving;
-
-    }
-    //Turns the raw string info from the text file into the wall's seralized object
-    public MovingPlatform readJSON(string jsontext)
-    {
-        try
-        {
-            return JsonUtility.FromJson<MovingPlatform>(jsontext);
-        }
-        catch (Exception)
-        {
-            Debug.Log("INVALID JSON RESETING");
-
-            if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
-            {
-                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-            }
-            File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
-            File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
-            return JsonUtility.FromJson<MovingPlatform>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
-        }
 
     }
 }

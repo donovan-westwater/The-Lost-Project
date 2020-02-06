@@ -1096,7 +1096,7 @@ GameObject:
   - component: {fileID: 187441869}
   - component: {fileID: 187441868}
   m_Layer: 0
-  m_Name: Floor (8)
+  m_Name: Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6188,7 +6188,7 @@ GameObject:
   - component: {fileID: 1383713109}
   - component: {fileID: 1383713108}
   m_Layer: 0
-  m_Name: Floor (12)
+  m_Name: Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11566,6 +11566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioSingleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262322704053545965, guid: 3837ae2cb6b371a4d80cd3ac792b7cab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8262322704053545966, guid: 3837ae2cb6b371a4d80cd3ac792b7cab,
         type: 3}

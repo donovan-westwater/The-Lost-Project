@@ -30,8 +30,7 @@ public class KeyScript : GlitchObject
 
 
     public string newFileToGenerate;
-
-    bool SendToNextLevel = false;
+    
     public bool isFirstOne = false;
     AudioSource source;
 
@@ -41,7 +40,7 @@ public class KeyScript : GlitchObject
         playerStartingPos = startingTransform.transform.position;
         playerStartingRot = startingTransform.transform.rotation;
         source = this.GetComponent<AudioSource>();
-        File.Delete(playerSelectedFilePath + "/" + "WallConnected" + ".json");
+        DeleteJSON("WallConnected");
 
         ApplyChanges();
 
@@ -62,55 +61,30 @@ public class KeyScript : GlitchObject
 
     public override void ApplyChange()
     {
-        jsonFileName = "Key";
-        if (File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
+        if (IExist(this))
         {
-            string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
-            string jsontext = System.IO.File.ReadAllText(filepath);
-
-            KeyJson obj = readJSON(jsontext);
+            jsonFileName = "Key";
+            KeyJson obj = ReadJSON<KeyJson>(this);
             if (obj.SendToNextLevel)
             {
-                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-                File.Delete(playerSelectedFilePath + "/" + "WallConnected" + ".json");
-                File.Delete(playerSelectedFilePath + "/" + "Flip" + ".json");
+                DeleteJSON(jsonFileName);
+                DeleteJSON("WallConnected");
+                DeleteJSON("Flip");
                 if (newFileToGenerate != "")
                 {
-                    FolderSingleton.instance.SendFileToPlayer(newFileToGenerate + ".json");
+                    CreateJSON(newFileToGenerate);
                 }
                 player.SetActive(false);
                 player.transform.position = endingTransform.transform.position;
                 player.SetActive(true);
                 if (isEndOfLevel == true)
                 {
+                    DeleteJSON("WallConnected");
                     SceneManager.LoadScene("FinalLevel");
                 }
             }
         }
     }
-
-    public KeyJson readJSON(string jsontext)
-    {
-        try
-        {
-            return JsonUtility.FromJson<KeyJson>(jsontext);
-        }
-        catch (Exception)
-        {
-            Debug.Log("INVALID JSON RESETING");
-
-            if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
-            {
-                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-            }
-            File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
-            File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
-            return JsonUtility.FromJson<KeyJson>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
-        }
-    }
-
-
-
 
     public void ApplyChanges()
     {
@@ -121,7 +95,10 @@ public class KeyScript : GlitchObject
 
         foreach (GlitchObject glitch in glitches)
         {
-            glitch.ApplyChange();
+            if (IExist(glitch))
+            {
+                glitch.ApplyChange();
+            }
         }
     }
 

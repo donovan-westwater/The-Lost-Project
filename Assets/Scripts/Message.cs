@@ -29,33 +29,33 @@ public class Message : MonoBehaviour
         {
             if (messageNumber == 0)
             {
-                FolderSingleton.instance.SendFileToPlayer("Broken Bridge.txt");
+                FolderSingleton.INSTANCE.SendFileToPlayer("Broken Bridge.txt");
             }
             if (messageNumber == 1)
             {
-                FolderSingleton.instance.SendFileToPlayer("door.json");
+                FolderSingleton.INSTANCE.SendFileToPlayer("door.json");
             }
             if (messageNumber == 2)
             {
-                FolderSingleton.instance.SendFileToPlayer("wall.json");
+                FolderSingleton.INSTANCE.SendFileToPlayer("wall.json");
 
             }
             if (messageNumber == 3)
             {
-                FolderSingleton.instance.SendFileToPlayer("spin.json");
+                FolderSingleton.INSTANCE.SendFileToPlayer("spin.json");
             }
             if (messageNumber == 4)
             {
-                FolderSingleton.instance.SendFileToPlayer("MovingPlatform.json");
+                FolderSingleton.INSTANCE.SendFileToPlayer("MovingPlatform.json");
             }
             if (messageNumber == 5)
             {
-                FolderSingleton.instance.SendFileToPlayer("SpinAndMove.json");
+                FolderSingleton.INSTANCE.SendFileToPlayer("SpinAndMove.json");
             }
             if (messageNumber == 6)
             {
-                FolderSingleton.instance.SendFileToPlayer("spin.json");
-                FolderSingleton.instance.SendFileToPlayer("MovingPlatform.json");
+                FolderSingleton.INSTANCE.SendFileToPlayer("spin.json");
+                FolderSingleton.INSTANCE.SendFileToPlayer("MovingPlatform.json");
             }
         }
     }

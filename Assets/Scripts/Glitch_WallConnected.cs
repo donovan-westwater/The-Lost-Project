@@ -23,13 +23,10 @@ public class Glitch_WallConnected : GlitchObject
 
     public override void ApplyChange()
     {
-        jsonFileName = "WallConnected";
-        string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
-        if (File.Exists(filepath))
+        if (IExist(this))
         {
-            string jsontext = System.IO.File.ReadAllText(filepath);
-
-            WallConnected obj = readJSON(jsontext);
+            jsonFileName = "WallConnected";
+            WallConnected obj = ReadJSON<WallConnected>(this);
             if (isSetOne)
             {
                 for (int i = 0; i < this.gameObject.transform.childCount; i++)
@@ -44,26 +41,6 @@ public class Glitch_WallConnected : GlitchObject
                     this.gameObject.transform.GetChild(i).gameObject.SetActive(CheckForFlip(obj.SetTwoIsActive));
                 }
             }
-        }
-    }
-    public WallConnected readJSON(string jsontext)
-    {
-        try
-        {
-            return JsonUtility.FromJson<WallConnected>(jsontext);
-        }
-        catch (Exception)
-        {
-            Debug.Log("INVALID JSON RESETING");
-
-            if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
-            {
-                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-            }
-            File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
-            File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
-
-            return JsonUtility.FromJson<WallConnected>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
         }
     }
 

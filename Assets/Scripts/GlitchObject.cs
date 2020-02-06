@@ -15,16 +15,36 @@ public abstract class GlitchObject : MonoBehaviour
 
     private void Awake()
     {
-        playerSelectedFilePath = FolderSingleton.instance.playerSelectedFilePath;
+        playerSelectedFilePath = FolderSingleton.INSTANCE.playerSelectedFilePath;
     }
 
-    public void CreateJSON(string jsonName)
+    public static void CreateJSON(string jsonName)
     {
-        if (!File.Exists(playerSelectedFilePath + "/" + jsonName + ".json"))
+        FolderSingleton.INSTANCE.SendFileToPlayer(jsonName + ".json");
+    }
+
+    public static void DeleteJSON(string jsonName)
+    {
+        FolderSingleton.INSTANCE.DeleteFileFromPlayer(jsonName + ".json");
+    }
+
+    public static bool IExist(GlitchObject gObject)
+    {
+        return FolderSingleton.INSTANCE.DoesFileExistForPlayer(gObject.jsonFileName + ".json");
+    }
+
+    public static T ReadJSON<T>(GlitchObject gObject)
+    {
+        try
         {
-            File.Delete(playerSelectedFilePath + "/" + jsonName + ".json");
+            return JsonUtility.FromJson<T>(FolderSingleton.INSTANCE.GetFullTextFromPlayer(gObject.jsonFileName));
         }
-        File.Create(playerSelectedFilePath + "/" + jsonName + ".json").Dispose();
-        File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonName + ".json", playerSelectedFilePath + "/" + jsonName + ".json", true);
+        catch (Exception)
+        {
+            Debug.Log("INVALID JSON RESETING");
+            CreateJSON(gObject.jsonFileName);
+
+            return JsonUtility.FromJson<T>(FolderSingleton.INSTANCE.GetFullTextFromSource(gObject.jsonFileName));
+        }
     }
 }

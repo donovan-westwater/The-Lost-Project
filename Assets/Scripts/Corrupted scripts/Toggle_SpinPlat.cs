@@ -22,13 +22,7 @@ public class Toggle_SpinPlat : GlitchObject
     {
         jsonFileName = "SpinAndMove";
         startingDir = this.transform.forward;
-
-        if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
-        {
-            File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-        }
-        File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
-        File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
+        CreateJSON(jsonFileName);
     }
     // Update is called once per frame
     void Update()
@@ -62,33 +56,8 @@ public class Toggle_SpinPlat : GlitchObject
     }
     public override void ApplyChange()
     {
-        string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
-        string jsontext = System.IO.File.ReadAllText(filepath);
-
-        SpinningPlatform obj = readJSON(jsontext);
+        SpinningPlatform obj = ReadJSON<SpinningPlatform>(this);
         move = obj.isMoving;
         spin = obj.isSpinning;
-
-    }
-    //Turns the raw string info from the text file into the wall's seralized object
-    public SpinningPlatform readJSON(string jsontext)
-    {
-        try
-        {
-            return JsonUtility.FromJson<SpinningPlatform>(jsontext);
-        }
-        catch (Exception)
-        {
-            Debug.Log("INVALID JSON RESETING");
-
-            if (!File.Exists(playerSelectedFilePath + "/" + jsonFileName + ".json"))
-            {
-                File.Delete(playerSelectedFilePath + "/" + jsonFileName + ".json");
-            }
-            File.Create(playerSelectedFilePath + "/" + jsonFileName + ".json").Dispose();
-            File.Copy(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json", playerSelectedFilePath + "/" + jsonFileName + ".json", true);
-            return JsonUtility.FromJson<SpinningPlatform>(System.IO.File.ReadAllText(FolderSingleton.instance.sourceFilePath + "/" + jsonFileName + ".json"));
-        }
-
     }
 }

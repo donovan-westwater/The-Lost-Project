@@ -16,16 +16,6 @@ public class SetPathThatPlayerSelected : MonoBehaviour
 {
     public void SetPath()
     {
-        string path3 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/LostGame";
-        
-        DirectoryInfo dir = Directory.CreateDirectory(path3);
-
-        File.SetAttributes(path3, FileAttributes.Normal);
-
-        FolderSingleton.instance.playerSelectedFilePath = path3;
-
-        SceneManager.LoadScene("Tutorial");
-
-        
+        SceneManager.LoadScene("Level2");
     }
 }
