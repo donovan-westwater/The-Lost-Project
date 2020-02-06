@@ -1374,7 +1374,8 @@ PrefabInstance:
       propertyPath: playerSelectedFilePath
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6943287182644768958, guid: b081903888418fb4aa3a1b90467598c8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b081903888418fb4aa3a1b90467598c8, type: 3}
 --- !u!1 &95501676
 GameObject:
@@ -22586,7 +22587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a3eb72718b85bb4da44e39b9caac53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSelectedFilePath: 
   jsonFileName: 
 --- !u!4 &1982357964
 Transform:
@@ -23627,6 +23627,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioSingleton
       objectReference: {fileID: 0}
+    - target: {fileID: 8262322704053545965, guid: 3837ae2cb6b371a4d80cd3ac792b7cab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8262322704053545966, guid: 3837ae2cb6b371a4d80cd3ac792b7cab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24403,7 +24408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a3eb72718b85bb4da44e39b9caac53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSelectedFilePath: 
   jsonFileName: 
 --- !u!4 &1303936289684627623
 Transform:
@@ -24525,7 +24529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adece4c447c9f8438572d9db75ac119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSelectedFilePath: 
   jsonFileName: 
   spin: 1
   spindir: {x: 0, y: 120, z: 0}
@@ -24925,7 +24928,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a3eb72718b85bb4da44e39b9caac53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSelectedFilePath: 
   jsonFileName: 
 --- !u!1 &8296172667446846946
 GameObject:

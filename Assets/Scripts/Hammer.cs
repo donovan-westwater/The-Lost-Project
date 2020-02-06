@@ -14,7 +14,6 @@ public class Hammer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(Vector3.Distance(player.transform.position, transform.position));
         if (Vector3.Distance(player.transform.position,transform.position) < 1.5f && transform.parent == null)
         {
             print("here");

@@ -5,29 +5,11 @@ using System.IO;
 using System.Security.AccessControl;
 using System;
 using static System.Environment;
-public class FolderSingleton : MonoBehaviour
+public static class FolderSingleton
 {
-    public static FolderSingleton INSTANCE;
-    [HideInInspector]
-    public string playerSelectedFilePath;
+    [HideInInspector] public static string playerSelectedFilePath { get { return SpecialFolder.MyDocuments + "/TheLostGame"; } }
 
-    void Awake()
-    {
-        if (INSTANCE == null && INSTANCE != this)
-        {
-            INSTANCE = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this);
-        }
-
-        playerSelectedFilePath = SpecialFolder.MyDocuments+"/TheLostGame";
-        Directory.CreateDirectory(playerSelectedFilePath);
-    }
-
-    public string GetFullTextFromSource(string fileName)
+    public static string GetFullTextFromSource(string fileName)
     {
         string shortFileName = fileName;
         if (fileName.IndexOf(".") > 0)
@@ -38,7 +20,7 @@ public class FolderSingleton : MonoBehaviour
         string newFileText = newFile.text;
         return newFileText;
     }
-    public string GetFullTextFromPlayer(string fileName)
+    public static string GetFullTextFromPlayer(string fileName)
     {
         string shortFileName = fileName;
         if (fileName.IndexOf(".") > 0)
@@ -51,17 +33,14 @@ public class FolderSingleton : MonoBehaviour
         return jsontext;
     }
 
-    public void SendFileToPlayer(string fileName)
+    public static void SendFileToPlayer(string fileName)
     {
-        //File.Delete(playerSelectedFilePath + "/" + fileName);
-        //File.Create(playerSelectedFilePath + "/" + fileName).Dispose();
-
         DeleteFileFromPlayer(fileName);
         File.Create(playerSelectedFilePath + "/" + fileName).Dispose();
         File.WriteAllText(playerSelectedFilePath + "/" + fileName, GetFullTextFromSource(fileName));
     }
 
-    public void DeleteFileFromPlayer(string fileName)
+    public static void DeleteFileFromPlayer(string fileName)
     {
         if (File.Exists(playerSelectedFilePath + "/" + fileName))
         {
@@ -69,10 +48,8 @@ public class FolderSingleton : MonoBehaviour
         }
     }
 
-    public bool DoesFileExistForPlayer(string fileName)
+    public static bool DoesFileExistForPlayer(string fileName)
     {
         return File.Exists(playerSelectedFilePath + "/" + fileName);
     }
-
-
 }

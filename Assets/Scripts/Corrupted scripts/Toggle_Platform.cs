@@ -51,11 +51,7 @@ public class Toggle_Platform : GlitchObject
     }
     public override void ApplyChange()
     {
-        string filepath = playerSelectedFilePath + "/" + jsonFileName + ".json";
-        string jsontext = System.IO.File.ReadAllText(filepath);
-
         MovingPlatform obj = ReadJSON<MovingPlatform>(this);
         move = obj.isMoving;
-
     }
 }

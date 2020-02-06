@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3442911260974792439}
-  - component: {fileID: 6943287182644768958}
+  - component: {fileID: 7730272883347796504}
   m_Layer: 0
   m_Name: FolderSinglton
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6943287182644768958
+--- !u!114 &7730272883347796504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,8 +40,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3144811123756653128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ff2ade0c63d64643961ced7cdffc575, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c472b15b3774374880b7245ccdf436c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSelectedFilePath: 
-  sourceFilePath: 

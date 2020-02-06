@@ -16,6 +16,6 @@ public class SetPathThatPlayerSelected : MonoBehaviour
 {
     public void SetPath()
     {
-        SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene("Level1");
     }
 }

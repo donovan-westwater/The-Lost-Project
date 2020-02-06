@@ -1717,11 +1717,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1925183995}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ff2ade0c63d64643961ced7cdffc575, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c472b15b3774374880b7245ccdf436c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSelectedFilePath: 
-  sourceFilePath: 
 --- !u!1001 &2019271542
 PrefabInstance:
   m_ObjectHideFlags: 0
